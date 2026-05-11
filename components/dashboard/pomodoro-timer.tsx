@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { TimerMode, TimerStatus } from '@/lib/types';
 import { FOCUS_DURATION, BREAK_DURATION, formatTime, getMockActiveStudents } from '@/lib/utils';
+import { Zap, Coffee, CheckCircle, PartyPopper } from 'lucide-react';
 
 interface PomodoroTimerProps {
   onSessionComplete: () => void;
@@ -98,9 +99,10 @@ export default function PomodoroTimer({ onSessionComplete }: PomodoroTimerProps)
               background: mode === m ? (m === 'focus' ? 'var(--lime)' : 'var(--orange)') : 'transparent',
               color: mode === m ? 'var(--black)' : 'var(--text3)',
               opacity: status !== 'idle' && mode !== m ? 0.4 : 1,
+              display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center',
             }}
           >
-            {m === 'focus' ? '⚡ Focus' : '☕ Break'}
+            {m === 'focus' ? <><Zap size={14} strokeWidth={2} /> Focus</> : <><Coffee size={14} strokeWidth={2} /> Break</>}
           </button>
         ))}
       </div>
@@ -126,7 +128,9 @@ export default function PomodoroTimer({ onSessionComplete }: PomodoroTimerProps)
         }}>
           {isCompleted ? (
             <div style={{ textAlign: 'center', animation: 'scaleIn 0.3s ease' }}>
-              <div style={{ fontSize: '40px', marginBottom: '4px' }}>{isBreak ? '✅' : '🎉'}</div>
+              <div style={{ marginBottom: '4px', display: 'flex', justifyContent: 'center' }}>
+                {isBreak ? <CheckCircle size={40} strokeWidth={1.5} color="var(--orange)" /> : <PartyPopper size={40} strokeWidth={1.5} color="var(--lime)" />}
+              </div>
               <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '16px', color: isBreak ? 'var(--orange)' : 'var(--lime)' }}>
                 {mode === 'focus' ? 'Session complete!' : 'Break over!'}
               </div>

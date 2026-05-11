@@ -1,6 +1,7 @@
 'use client';
 
 import { useStudy } from '@/context/study-context';
+import { Bot } from 'lucide-react';
 
 export default function AIInsights() {
   const { state, fetchInsights } = useStudy();
@@ -37,7 +38,7 @@ export default function AIInsights() {
       {/* Empty state */}
       {noSessions && (
         <div style={{ textAlign: 'center', padding: '24px 0', color: 'var(--text3)' }}>
-          <div style={{ fontSize: '28px', marginBottom: '8px' }}>🤖</div>
+          <div style={{ marginBottom: '8px', display: 'flex', justifyContent: 'center' }}><Bot size={32} strokeWidth={1.5} /></div>
           <p style={{ fontFamily: 'var(--font-display)', fontSize: '13px', color: 'var(--text2)', marginBottom: '4px' }}>No data yet</p>
           <p style={{ fontSize: '12px' }}>Complete a session to unlock AI insights.</p>
         </div>
@@ -94,8 +95,8 @@ export default function AIInsights() {
       {/* Prompt to generate */}
       {!noSessions && !insightsLoading && insights.length === 0 && !insightsError && (
         <div style={{ textAlign: 'center', padding: '16px 0' }}>
-          <button onClick={fetchInsights} className="btn btn-outline" style={{ fontSize: '13px', padding: '10px 20px' }}>
-            🤖 Generate Insights
+          <button onClick={fetchInsights} className="btn btn-outline" style={{ fontSize: '13px', padding: '10px 20px', display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
+            <Bot size={16} strokeWidth={1.5} /> Generate Insights
           </button>
           <p style={{ fontSize: '11px', color: 'var(--text3)', marginTop: '8px', fontFamily: 'var(--font-display)' }}>
             Based on {stats.totalSessions} session{stats.totalSessions !== 1 ? 's' : ''}

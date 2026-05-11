@@ -2,31 +2,35 @@
 
 import { StudyStats } from '@/lib/types';
 import { todayKey } from '@/lib/utils';
+import { Zap, BookOpen, Flame } from 'lucide-react';
 
 export function StatCards({ stats }: { stats: StudyStats }) {
   const cards = [
-    { label: 'Today', value: stats.sessionsToday, icon: '⚡', suffix: stats.sessionsToday === 1 ? 'session' : 'sessions' },
-    { label: 'Total',  value: stats.totalSessions,  icon: '📚', suffix: 'sessions' },
-    { label: 'Streak', value: stats.currentStreak,  icon: '🔥', suffix: stats.currentStreak === 1 ? 'day' : 'days' },
+    { label: 'Today', value: stats.sessionsToday, icon: Zap, suffix: stats.sessionsToday === 1 ? 'session' : 'sessions' },
+    { label: 'Total',  value: stats.totalSessions,  icon: BookOpen, suffix: 'sessions' },
+    { label: 'Streak', value: stats.currentStreak,  icon: Flame, suffix: stats.currentStreak === 1 ? 'day' : 'days' },
   ];
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
-      {cards.map((c, i) => (
-        <div key={i} className="card-inset" style={{ padding: '16px', textAlign: 'center' }}>
-          <div style={{ fontSize: '20px', marginBottom: '6px' }}>{c.icon}</div>
-          <div style={{
-            fontFamily: 'var(--font-mono)', fontWeight: 700,
-            fontSize: '28px', color: c.label === 'Streak' && c.value > 0 ? 'var(--lime)' : 'var(--text)',
-            lineHeight: 1, marginBottom: '4px',
-          }}>
-            {c.value}
+      {cards.map((c, i) => {
+        const Icon = c.icon;
+        return (
+          <div key={i} className="card-inset" style={{ padding: '16px', textAlign: 'center' }}>
+            <div style={{ marginBottom: '6px', display: 'flex', justifyContent: 'center' }}><Icon size={24} strokeWidth={1.5} color="var(--text2)" /></div>
+            <div style={{
+              fontFamily: 'var(--font-mono)', fontWeight: 700,
+              fontSize: '28px', color: c.label === 'Streak' && c.value > 0 ? 'var(--lime)' : 'var(--text)',
+              lineHeight: 1, marginBottom: '4px',
+            }}>
+              {c.value}
+            </div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '10px', fontWeight: 600, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              {c.label}
+            </div>
           </div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: '10px', fontWeight: 600, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            {c.label}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

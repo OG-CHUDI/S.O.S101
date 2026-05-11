@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useStudy } from '@/context/study-context';
+import { Bot, Clock, BookOpen, Target, Edit } from 'lucide-react';
 
 export default function StudyPlanner() {
   const { state, generatePlan } = useStudy();
@@ -47,9 +48,9 @@ export default function StudyPlanner() {
           <button
             onClick={() => { setShowForm(true); }}
             className="btn btn-ghost"
-            style={{ fontSize: '11px', padding: '6px 12px' }}
+            style={{ fontSize: '11px', padding: '6px 12px', display: 'flex', alignItems: 'center', gap: '4px' }}
           >
-            ✏️ New Plan
+            <Edit size={14} strokeWidth={1.5} /> New Plan
           </button>
         )}
       </div>
@@ -137,7 +138,7 @@ export default function StudyPlanner() {
             onClick={handleGenerate}
             disabled={!canGenerate || planLoading}
             className="btn btn-lime"
-            style={{ justifyContent: 'center', fontSize: '13px' }}
+            style={{ justifyContent: 'center', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px' }}
           >
             {planLoading ? (
               <>
@@ -148,7 +149,7 @@ export default function StudyPlanner() {
                 </div>
                 Generating plan…
               </>
-            ) : '🤖 Generate Study Plan'}
+            ) : <><Bot size={16} strokeWidth={1.5} /> Generate Study Plan</>}
           </button>
         </div>
       )}
@@ -166,9 +167,9 @@ export default function StudyPlanner() {
               {plan.goal}
             </div>
             <div style={{ display: 'flex', gap: '12px', fontSize: '11px', color: 'var(--text3)', fontFamily: 'var(--font-mono)' }}>
-              <span>⏱ {plan.timeframe}</span>
-              <span>📚 {plan.subjects.join(', ')}</span>
-              <span>🎯 ~{plan.totalSessionsPerDay}/day</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Clock size={12} strokeWidth={2} /> {plan.timeframe}</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><BookOpen size={12} strokeWidth={2} /> {plan.subjects.join(', ')}</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Target size={12} strokeWidth={2} /> ~{plan.totalSessionsPerDay}/day</span>
             </div>
           </div>
 

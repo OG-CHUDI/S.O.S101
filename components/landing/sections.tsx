@@ -1,14 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { Timer, Flame, BarChart3, Users, Bot, Calendar, Monitor, Play } from 'lucide-react';
 
 const FEATURES = [
-  { icon: '⏱', title: 'Pomodoro Timer', desc: '25-minute focus sessions with 5-minute breaks. The proven method, perfectly tuned.' },
-  { icon: '🔥', title: 'Streak System', desc: 'Build momentum by studying every day. Your streak is your accountability partner.' },
-  { icon: '📊', title: 'Progress Tracking', desc: 'Daily and weekly session counts, visual charts, and clear progress history.' },
-  { icon: '🤝', title: 'Co-Study Mode', desc: 'See how many students are studying alongside you. You are never alone.' },
-  { icon: '🤖', title: 'AI Insights', desc: 'Personalized observations about your study patterns — when you\'re best, where to improve.' },
-  { icon: '📅', title: 'AI Study Planner', desc: 'Tell the AI your goals and get a structured daily plan with session distribution.' },
+  { icon: Timer, title: 'Pomodoro Timer', desc: '25-minute focus sessions with 5-minute breaks. The proven method, perfectly tuned.' },
+  { icon: Flame, title: 'Streak System', desc: 'Build momentum by studying every day. Your streak is your accountability partner.' },
+  { icon: BarChart3, title: 'Progress Tracking', desc: 'Daily and weekly session counts, visual charts, and clear progress history.' },
+  { icon: Users, title: 'Co-Study Mode', desc: 'See how many students are studying alongside you. You are never alone.' },
+  { icon: Bot, title: 'AI Insights', desc: 'Personalized observations about your study patterns — when you\'re best, where to improve.' },
+  { icon: Calendar, title: 'AI Study Planner', desc: 'Tell the AI your goals and get a structured daily plan with session distribution.' },
 ];
 
 const STEPS = [
@@ -37,7 +38,9 @@ export function Features() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
-          {FEATURES.map((f, i) => (
+          {FEATURES.map((f, i) => {
+            const Icon = f.icon;
+            return (
             <div key={i} className="card-inset" style={{
               padding: '24px', transition: 'all 0.2s ease',
             }}
@@ -48,12 +51,13 @@ export function Features() {
                 width: '42px', height: '42px', borderRadius: '10px',
                 background: 'var(--surface3)', border: '1px solid var(--border)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '20px', marginBottom: '14px',
-              }}>{f.icon}</div>
+                marginBottom: '14px',
+              }}><Icon size={20} strokeWidth={1.5} color="var(--text2)" /></div>
               <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '15px', color: 'var(--text)', marginBottom: '6px' }}>{f.title}</h3>
               <p style={{ fontSize: '13px', color: 'var(--text2)', lineHeight: 1.65 }}>{f.desc}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -75,16 +79,20 @@ export function HowItWorks() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px' }}>
-          {STEPS.map((s, i) => (
+          {STEPS.map((s, i) => {
+            const stepsIcons = [Monitor, Play, BarChart3, Bot];
+            const StepIcon = stepsIcons[i];
+            return (
             <div key={i} style={{ textAlign: 'center', padding: '8px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, color: 'var(--lime)', letterSpacing: '0.1em', marginBottom: '16px' }}>{s.n}</div>
-              <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'var(--surface2)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', fontSize: '22px' }}>
-                {['🖥️','▶️','📊','🤖'][i]}
+              <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'var(--surface2)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px' }}>
+                <StepIcon size={24} strokeWidth={1.5} color="var(--text2)" />
               </div>
               <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '14px', color: 'var(--text)', marginBottom: '6px' }}>{s.title}</h3>
               <p style={{ fontSize: '13px', color: 'var(--text2)', lineHeight: 1.6 }}>{s.desc}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '56px' }}>

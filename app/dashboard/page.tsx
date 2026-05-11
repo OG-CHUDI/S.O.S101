@@ -2,6 +2,7 @@
 
 import { useCallback } from 'react';
 import Link from 'next/link';
+import { Flame } from 'lucide-react';
 import { useStudy } from '@/context/study-context';
 import PomodoroTimer from '@/components/dashboard/pomodoro-timer';
 import { StatCards, WeeklyChart } from '@/components/dashboard/session-stats';
@@ -47,8 +48,8 @@ export default function DashboardPage() {
           {/* Streak badge in header */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {stats.currentStreak > 0 && (
-              <div className="badge badge-lime">
-                🔥 {stats.currentStreak} day streak
+              <div className="badge badge-lime" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Flame size={14} strokeWidth={2} /> {stats.currentStreak} day streak
               </div>
             )}
             {noSessions && (
